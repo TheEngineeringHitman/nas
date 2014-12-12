@@ -117,17 +117,17 @@ y|yes )
 				chmod 700 $samba_dir
 				echo "Please enter the user who may access this share. >"
 				read user
-				if [[ $(getent passwd $user >/dev/null 2>&1 && true ]]; then
+				if id -u $user >/dev/null 2>&1; then
 					chown $user:$user $samba_dir
-					chown_done=1;
+					chown_done=1
 				else
-					chown_done=0;
+					chown_done=0
 				fi	
 				cp $conf /etc/samba/smb.conf.old
 				echo "" >> $conf
 				echo "["$name"]" >> $conf
 				echo "path = "$samba_dir >> $conf
-				echo "valid users = "$name >> $conf
+				echo "valid users = "$user >> $conf
 				echo "create mask = 0700" >> $conf
 				echo "directory mask = 0700" >> $conf
 				echo "read only = no" >> $conf
@@ -135,21 +135,21 @@ y|yes )
 				echo $conf" file updated. Restarting samba service..."
 				/etc/init.d/samba restart
 				echo "Finished restarting."
-				if [[ chown_done == 0 ]]; then
-					echo "Ensure that user "$name" is been created before use."
+				if [[ $chown_done == 0 ]]; then
+					echo "Ensure that user "$user" is been created before use."
 					echo "To check registered users type:"
 					echo "sudo pdbedit -L -v"
 					echo "To create a new user type:"
-					echo "sudo useradd "$name" -m -G usergroup"
-					echo "sudo passwd "$name
-					echo "sudo smbpasswd -a "$name
-					echo "finally, to change ownership of "$samba_dir" to "$name" type:"
-					echo "sudo chown "$name":"$name" "$samba_dir
+					echo "sudo useradd "$user" -m -G usergroup"
+					echo "sudo passwd "$user
+					echo "sudo smbpasswd -a "$user
+					echo "finally, to change ownership of "$samba_dir" to "$user" type:"
+					echo "sudo chown "$user":"$user" "$samba_dir
 				else
 					echo "I have confirmed that user:"$name" exists and have made them the owner of "$smaba_dir"."
 					echo "Please remember to add them to the samba passwrd file if you have not yet done so by"
 					echo "typing:"
-					ech "sudo smbpasswd -a "$name
+					echo "sudo smbpasswd -a "$user
 				fi
 			else
 				echo $conf" file not found. Are you sure samba has been installed? No changes made!"

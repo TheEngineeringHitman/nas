@@ -9,7 +9,7 @@ echo "################################################"
 conf="/etc/samba/smb.conf"
 shopt -s nocasematch
 
-echo -e "\nThis script will help you install and configure Samaba file sharing. Would you like to contine? (y/n)>"
+echo -e "\nThis script will help you install and configure Samaba file sharing. Would you like to continue? (y/n)>"
 read answer
 case "$answer" in
 y|yes )
@@ -24,7 +24,7 @@ y|yes )
 		if [[ "$(whoami)" = "root" ]]; then
 		echo "Would you like to update the sources list before continuing? (y/n)>"
 		read sources
-		echo "Would you like to perform a dist-upgrade before continuting? (y/n)>"
+		echo "Would you like to perform a dist-upgrade before continuing? (y/n)>"
 		read upgr
 		echo "Would you like to perform autoremove to get rid of old/unused packages before continuing? (y/n)>"
 		read autor

@@ -7,8 +7,8 @@ echo "## Date: 11/07/14"
 echo "################################################"
 
 shopt -s nocasematch
-echo -e "\nThis script will display a list of currently unmounte disks and will allow"
-echo "the user to assocaite them with a mountpoint. It will then create an fstab entry"
+echo -e "\nThis script will display a list of currently unmounted disks and will allow"
+echo "the user to associate them with a mountpoint. It will then create an fstab entry"
 echo "using the disks UUID so that it will always be mounted even if it is not always"
 echo "detected with the same identifier (eg sda, sdb, etc)."
 echo "Would you like to continue? (y/n)>"

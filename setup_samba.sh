@@ -13,7 +13,7 @@ echo -e "\nThis script will help you install and configure Samaba file sharing. 
 read answer
 case "$answer" in
 y|yes )
-	echo "This script can help with the folwing options. Which would you like to do?"
+	echo "This script can help with the following options. Which would you like to do?"
 	echo "i = install samba.(about 2min)"
 	echo "p = create a public samba share visible to anyone on your network."
 	echo "h = create a hidden samba share visible only to one user."
@@ -71,7 +71,7 @@ y|yes )
 				else{
 					print $0;
 				}}' /etc/samba/smb.conf.old > /etc/samba/smb.conf
-			echo "Samba has been instaled, please rerun this script if you would like help creating shares."
+			echo "Samba has been installed, please rerun this script if you would like help creating shares."
 		else
 			echo "This option must be run as root. Please try again using sudo."
 		fi
@@ -155,12 +155,12 @@ y|yes )
 					echo "sudo chown "$user":"$user" "$samba_dir
 				else
 					echo "I have confirmed that user "$name" exists and have made them the owner of "$samba_dir"."
-					echo "Please remember to add them to the samba passwrd file if you have not yet done so by"
+					echo "Please remember to add them to the samba password file if you have not yet done so by"
 					echo "typing:"
 					echo "sudo smbpasswd -a "$user
 				fi
 			else
-				echo $conf" file not found. Are you sure samba has been installed? No changes made!"
+				echo $conf" file not found. Are you sure samba has been installed? No changes have been made!"
 			fi
 		else
 			echo "This option must be run as root. Please try again using sudo."

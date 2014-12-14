@@ -56,7 +56,7 @@ y|yes )
 			;;
 		esac
 			apt-get -q -y install samba samba-common-bin
-			mv /etc/samba/smb.conf smb.conf.old
+			mv /etc/samba/smb.conf /etc/samba/smb.conf.old
 			awk '//{
 				if(($0~/homes/ || 
 					/comment = Homes Directories/ ||
@@ -64,7 +64,7 @@ y|yes )
 					/valid users = \%S/ ||
 					/read only = yes/ ||
 					/create mask = 0700/ ||
-					/directory mask = 0700/ ||))&&($0!~/;/{
+					/directory mask = 0700/)&&($0!~/;/)){
 					print "#"$0;
 				}
 				else{

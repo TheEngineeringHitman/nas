@@ -56,6 +56,20 @@ y|yes )
 			;;
 		esac
 			apt-get -q -y install samba samba-common-bin
+			mv /etc/samba/smb.conf smb.conf.old
+			awk '//{
+				if(($0~/homes/ || 
+					/comment = Homes Directories/ ||
+					/browseable = no/ ||
+					/valid users = \%S/ ||
+					/read only = yes/ ||
+					/create mask = 0700/ ||
+					/directory mask = 0700/ ||))&&($0!~/;/{
+					print "#"$0;
+				}
+				else{
+					print $0;
+				}}' /etc/samba/smb.conf.old > /etc/samba/smb.conf
 			echo "Samba has been instaled, please rerun this script if you would like help creating shares."
 		else
 			echo "This option must be run as root. Please try again using sudo."
@@ -86,14 +100,7 @@ y|yes )
 				echo "guest ok = yes" >> $conf
 				echo $conf" file updated. Restarting samba service..."
 				/etc/init.d/samba restart
-				echo "Finished restarting."
-				echo "Ensure that there is at least one samba user registered in the users group."
-				echo "To check registered users type:"
-				echo "sudo pdbedit -L -v"
-				echo "To create a user in the users group type:"
-				echo "sudo useradd username -m -G users"
-				echo "sudo passwd username"
-				echo "sudo smbpasswd -a username"
+				echo "Finished creating public share."
 			else
 				echo $conf" file not found. Are you sure samba has been installed? No changes made!"
 			fi
@@ -112,7 +119,7 @@ y|yes )
 				mkdir -p $samba_dir
 			fi
 			if [[ -e "$conf" ]]; then
-				echo "Directory found. Please enter a display name for this share. >"
+				echo "Please enter a display name for this share. >"
 				read name
 				chmod 700 $samba_dir
 				echo "Please enter the user who may access this share. >"
@@ -146,7 +153,7 @@ y|yes )
 					echo "finally, to change ownership of "$samba_dir" to "$user" type:"
 					echo "sudo chown "$user":"$user" "$samba_dir
 				else
-					echo "I have confirmed that user:"$name" exists and have made them the owner of "$smaba_dir"."
+					echo "I have confirmed that user "$name" exists and have made them the owner of "$samba_dir"."
 					echo "Please remember to add them to the samba passwrd file if you have not yet done so by"
 					echo "typing:"
 					echo "sudo smbpasswd -a "$user

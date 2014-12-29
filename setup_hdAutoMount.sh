@@ -4,6 +4,7 @@ echo "################################################"
 echo "## Script: setup_hdAutoMount.sh"
 echo "## By: Andrew Herren"
 echo "## Date: 11/07/14"
+echo "## Script instructions: http://www.theengineeringhitman.com/external-storage-raspberry-pi/"
 echo "################################################"
 
 shopt -s nocasematch

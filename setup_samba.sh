@@ -4,6 +4,7 @@ echo "################################################"
 echo "## Script: setup_samba.sh"
 echo "## By: Andrew Herren"
 echo "## Date: 11/07/14"
+echo "## Script instructions: http://www.theengineeringhitman.com/raspberry-pi-nas-setup/"
 echo "################################################"
 
 conf="/etc/samba/smb.conf"

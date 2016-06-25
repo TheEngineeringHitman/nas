@@ -112,7 +112,7 @@ y|yes )
 		;;
 	h )
 		if [[ "$(whoami)" = "root" ]]; then
-			echo "Enter full path to the directory to share privatly. >"
+			echo "Enter full path to the directory to share privately. >"
 			read samba_dir
 			if [[ -d "$samba_dir" ]]; then
 				echo "Directory found."
